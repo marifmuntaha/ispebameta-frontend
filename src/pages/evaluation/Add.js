@@ -65,7 +65,7 @@ const Add = () => {
                 <Row className="g-gs">
                     <Col md="9">
                         <PreviewCard className="ps-3 pe-3">
-                            <h6 className="title">{aspect.name} - {instrument ? instrument.name : ""}</h6>
+                            <h6 className="title">{aspect.name}{instrument.name ? " - "  + instrument.name +  instrument.sub : ""}</h6>
                             <hr/>
                             <p style={{
                                 fontWeight: "bold",
@@ -91,6 +91,7 @@ const Add = () => {
                                                     });
                                                     value.push({
                                                         instrument: instrument.id,
+                                                        name: instrument.name,
                                                         indicator: indicator,
                                                     })
                                                     setResult(value);
@@ -127,7 +128,7 @@ const Add = () => {
                                         setButtonState(instrument.id);
                                     }}
                                 >
-                                    {instrument.name}
+                                    {instrument.name}{instrument.sub}
                                 </Button>
                             ))}
                             <Button
