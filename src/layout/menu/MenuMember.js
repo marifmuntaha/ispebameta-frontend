@@ -19,5 +19,10 @@ const menuMember = [
         text: "Penilaian",
         link: "/penilaian",
     },
+    {
+        icon: "file-doc",
+        text: "Hasil Supervisi",
+        link: "/hasil-supervisi",
+    },
 ];
 export default menuMember;

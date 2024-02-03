@@ -21,16 +21,30 @@ const Add = () => {
     const [teacher, setTeacher] = useState([]);
     const [instruments, setInstruments] = useState([]);
     const [instrument, setInstrument] = useState([]);
-    const [instrumentKeys, setInstrumentKeys] = useState([]);
     const [buttonState, setButtonState] = useState(0);
     const [result, setResult] = useState([]);
+    const [reference, setReference] = useState([]);
+    const [evaluation, setEvaluation] = useState([]);
     useEffect(() => {
+        Dispatch(actionType.EVALUATION_GET, {setData: setEvaluation}, {teacher: teacherID, aspect: aspectID}).then();
         Dispatch(actionType.ASPECT_SHOW, {setData: setAspect}, {id: aspectID}).then();
         Dispatch(actionType.TEACHER_SHOW, {setData: setTeacher}, {id: teacherID}).then();
         Dispatch(actionType.INSTRUMENT_GET,
             {setData: setInstruments},
             {aspect: aspectID, with: 'indicator'}).then();
     }, []);
+    useEffect(() => {
+        setReference(() => {
+            return result.filter((value) => {
+                return value.instrument === instrument.id
+            })
+        })
+    }, [result, instrument]);
+    useEffect(() => {
+        setResult(() => {
+            return evaluation.length > 0 ? JSON.parse(evaluation[0].result) : [];
+        });
+    }, [evaluation]);
     return <>
         <Head title="Penilaian"/>
         <Content page="component">
@@ -60,7 +74,7 @@ const Add = () => {
                             {instrument.indicators && instrument.indicators.map((indicator) => {
                                 let checked = result.filter((value) => {
                                     return value.instrument === instrument.id && value.indicator.id === indicator.id
-                                })
+                                });
                                 return (
                                     <div className="preview-block" key={indicator.id}>
                                         <div className="custom-control custom-radio">
@@ -77,7 +91,7 @@ const Add = () => {
                                                     });
                                                     value.push({
                                                         instrument: instrument.id,
-                                                        indicator: indicator
+                                                        indicator: indicator,
                                                     })
                                                     setResult(value);
                                                 }}
@@ -90,6 +104,14 @@ const Add = () => {
                                     </div>
                                 )
                             })}
+                        </PreviewCard>
+                        <PreviewCard className="ps-3 pe-3">
+                            <h6 className="title">REKOMENDASI</h6>
+                            <hr/>
+                            <p style={{
+                                fontWeight: "bold",
+                                textAlign: "justify"
+                            }}>{reference.length > 0 ? reference[0].indicator.reference : ""}</p>
                         </PreviewCard>
                     </Col>
                     <Col md="3">
@@ -112,15 +134,28 @@ const Add = () => {
                                 color="success"
                                 className="mb-auto col-12"
                                 outline
-                                onClick={() => Dispatch(actionType.EVALUATION_STORE, {
-                                    formData: {
-                                        user: user.id,
-                                        teacher: teacherID,
-                                        aspect: aspectID,
-                                        finish: 0,
-                                        result: JSON.stringify(result)
-                                    }
-                                })}
+                                onClick={() => {
+                                    evaluation.length > 0
+                                        ? Dispatch(actionType.EVALUATION_UPDATE, {
+                                            formData: {
+                                                id: evaluation[0].id,
+                                                user: user.id,
+                                                teacher: teacherID,
+                                                aspect: aspectID,
+                                                finish: 0,
+                                                result: JSON.stringify(result)
+                                            }
+                                        })
+                                        : Dispatch(actionType.EVALUATION_STORE, {
+                                            formData: {
+                                                user: user.id,
+                                                teacher: teacherID,
+                                                aspect: aspectID,
+                                                finish: 0,
+                                                result: JSON.stringify(result)
+                                            }
+                                        })
+                                }}
                             >
                                 <span className="align-items-center">SIMPAN</span>
                             </Button>
@@ -129,7 +164,7 @@ const Add = () => {
                 </Row>
             </Block>
         </Content>
-        <ToastContainer />
+        <ToastContainer/>
     </>
 }
 export default Add;

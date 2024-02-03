@@ -43,7 +43,7 @@ const Evaluation = () => {
                         <ul className="link-list-opt">
                             {aspects.map((aspect) => (
                                 <li key={aspect.id}>
-                                    <DropdownItem tag="a" href="" onClick={(ev) => {
+                                    <DropdownItem tag="a" style={{cursor: "pointer"}} onClick={() => {
                                         navigation(`aspek/${aspect.id}/guru/${row.id}`);
                                     }}>
                                         <span>{aspect.name}</span>

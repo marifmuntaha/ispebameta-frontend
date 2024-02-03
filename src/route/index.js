@@ -14,6 +14,8 @@ import Instrument from "../pages/instrument";
 import Indicator from "../pages/indicator";
 import Evaluation from "../pages/evaluation";
 import Add from "../pages/evaluation/Add";
+import Result from "../pages/result"
+import Print from "../pages/result/print"
 
 const Router = () => {
     const location = useLocation();
@@ -31,6 +33,7 @@ const Router = () => {
                 <Route path="/aspek/:aspectID/instrumen/:instrumentID" element={<Indicator/>}/>
                 <Route path="/penilaian" element={<Evaluation/>}/>
                 <Route path="/penilaian/aspek/:aspectID/guru/:teacherID" element={<Add/>}/>
+                <Route path="/hasil-supervisi" element={<Result/>}/>
 
                 {/*<Route path="/produk" element={<Product/>}></Route>*/}
                 {/*<Route element={<MemberProvider/>}>*/}
@@ -51,6 +54,7 @@ const Router = () => {
                 {/*<Route path="reset-sandi" element={<ForgotPassword/>}></Route>*/}
                 <Route path="pendaftaran" element={<Register/>}></Route>
                 <Route path="masuk" element={<Login/>}></Route>
+                <Route path="/hasil-supervisi/cetak" element={<Print/>}/>
 
                 {/*<Route path="errors">*/}
                 {/*    <Route path="404" element={<Error404/>}></Route>*/}
