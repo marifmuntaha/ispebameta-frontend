@@ -38,22 +38,22 @@ const Teacher = () => {
             name: "Perencanaan",
             selector: (row) => row.id,
             sortable: false,
-            cell: () => {
+            cell: (row) => {
                 let state = evaluations.filter((value) => {
-                    return value.aspect === 1
+                    return value.aspect === 1 && value.teacher === row.id
                 });
                 return (
                     <ButtonGroup size="sm">
                         <Button
                             color="outline-success"
-                            onClick={() => alert('testing')}
+                            onClick={() => alert(row.id)}
                             disabled={state.length !== 1}
                         >
                             <Icon name="whatsapp"/>
                         </Button>
                         <Button
                             color="outline-info"
-                            onClick={() => alert('cetak')}
+                            onClick={() => console.log(state[0])}
                             disabled={state.length !== 1}
                         >
                             <Icon name="printer"/>
@@ -66,9 +66,9 @@ const Teacher = () => {
             name: "Pelaksanaan",
             selector: (row) => row.id,
             sortable: false,
-            cell: () => {
+            cell: (row) => {
                 let state = evaluations.filter((value) => {
-                    return value.aspect === 2
+                    return value.aspect === 2 && value.teacher === row.id
                 });
                 return (
                     <ButtonGroup size="sm">
@@ -94,9 +94,9 @@ const Teacher = () => {
             name: "Evaluasi",
             selector: (row) => row.id,
             sortable: false,
-            cell: () => {
+            cell: (row) => {
                 let state = evaluations.filter((value) => {
-                    return value.aspect === 3
+                    return value.aspect === 3 && value.teacher === row.id
                 });
                 return (
                     <ButtonGroup size="sm">
