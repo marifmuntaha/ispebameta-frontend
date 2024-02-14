@@ -135,6 +135,21 @@ async function Dispatch(method, state, params) {
             return await deleteData(url, state).then(resp => {
                 return resp;
             });
+        case actionType.EVALUATION_PRINT :
+            url = '/evaluation/print';
+            return await storeData(url, state).then(resp => {
+                return resp;
+            });
+        case actionType.USER_GET :
+            url = '/user';
+            return await getData(url, state, params).then(resp => {
+                return resp;
+            });
+        case actionType.USER_UPDATE :
+            url = `/user/${state.formData.id}?_method=PUT`;
+            return await storeData(url, state).then(resp => {
+                return resp;
+            });
         default:
     }
 }

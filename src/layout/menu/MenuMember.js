@@ -24,5 +24,10 @@ const menuMember = [
         text: "Hasil Supervisi",
         link: "/hasil-supervisi",
     },
+    {
+        icon: "setting-alt",
+        text: "Pengatuan",
+        link: "/pengaturan",
+    },
 ];
 export default menuMember;

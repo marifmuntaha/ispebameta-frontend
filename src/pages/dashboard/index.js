@@ -1,9 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Content from "../../layout/content";
 import Head from "../../layout/head";
-import {Block, BlockBetween, BlockHead, BlockHeadContent, BlockTitle, Col, PreviewAltCard, Row} from "../../components";
+import {
+    Block,
+    BlockBetween,
+    BlockHead,
+    BlockHeadContent,
+    BlockTitle,
+    Col,
+    Icon,
+    Row
+} from "../../components";
+import {Card} from "reactstrap";
+import {actionType, Dispatch} from "../../reducer";
 
 const Dashboard = () => {
+    const [users, setUsers] = useState([]);
+    const [teachers, setTeachers] = useState({});
+    const [supervisi, setSupervisi] = useState({});
+    useEffect(() => {
+        Dispatch(actionType.USER_GET, {
+            setData: setUsers
+        }).then();
+        Dispatch(actionType.TEACHER_GET, {
+            setData: setTeachers
+        }).then();
+        Dispatch(actionType.EVALUATION_GET, {
+            setData: setSupervisi
+        }).then();
+    }, []);
     return (
         <>
             <Head title="Dashboard"/>
@@ -18,12 +43,78 @@ const Dashboard = () => {
                     </BlockBetween>
                 </BlockHead>
                 <Block>
-                    <Row>
-                        <Col md="4">
-                            <PreviewAltCard>
-                            </PreviewAltCard>
+                    <Row className="g-gs">
+                        <Col xxl="4" sm="6">
+                            <Card>
+                                <div className="nk-ecwg nk-ecwg6">
+                                    <div className="card-inner">
+                                        <div className="card-title-group">
+                                            <div className="card-title">
+                                                <h6 className="title">Data Pengguna</h6>
+                                            </div>
+                                        </div>
+                                        <div className="data">
+                                            <div className="data-group">
+                                                <div className="amount">{users.length} Pengguna</div>
+                                            </div>
+                                            <div className="info">
+                                                <span className="change up text-success">
+                                                    <Icon name="arrow-long-up"/>
+                                                </span>
+                                                <span> vs. last week</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Card>
                         </Col>
-                        <Col md="8">
+                        <Col xxl="4" sm="6">
+                            <Card>
+                                <div className="nk-ecwg nk-ecwg6">
+                                    <div className="card-inner">
+                                        <div className="card-title-group">
+                                            <div className="card-title">
+                                                <h6 className="title">Data Guru</h6>
+                                            </div>
+                                        </div>
+                                        <div className="data">
+                                            <div className="data-group">
+                                                <div className="amount">{teachers.length} Guru</div>
+                                            </div>
+                                            <div className="info">
+                                                <span className="change up text-success">
+                                                    <Icon name="arrow-long-up"/>
+                                                </span>
+                                                <span> vs. last week</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Card>
+                        </Col>
+                        <Col xxl="4" sm="6">
+                            <Card>
+                                <div className="nk-ecwg nk-ecwg6">
+                                    <div className="card-inner">
+                                        <div className="card-title-group">
+                                            <div className="card-title">
+                                                <h6 className="title">Data Supervisi</h6>
+                                            </div>
+                                        </div>
+                                        <div className="data">
+                                            <div className="data-group">
+                                                <div className="amount">{supervisi.length} Supervisi</div>
+                                            </div>
+                                            <div className="info">
+                                                <span className="change up text-success">
+                                                    <Icon name="arrow-long-up"/>
+                                                </span>
+                                                <span> vs. last week</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Card>
                         </Col>
                     </Row>
                 </Block>

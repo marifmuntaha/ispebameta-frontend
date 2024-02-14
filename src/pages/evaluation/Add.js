@@ -76,7 +76,7 @@ const Add = () => {
                                     return value.instrument === instrument.id && value.indicator.id === indicator.id
                                 });
                                 return (
-                                    <div className="preview-block" key={indicator.id}>
+                                    <div className="preview-block mt-2" key={indicator.id}>
                                         <div className="custom-control custom-radio">
                                             <input
                                                 type="radio"
@@ -155,7 +155,7 @@ const Add = () => {
                                                 finish: 0,
                                                 result: JSON.stringify(result)
                                             }
-                                        })
+                                        }).then(resp => console.log(resp))
                                 }}
                             >
                                 <span className="align-items-center">SIMPAN</span>
