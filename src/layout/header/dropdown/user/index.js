@@ -43,10 +43,10 @@ const User = () => {
         </div>
         <div className="dropdown-inner">
           <LinkList>
-            <LinkItem link="/user-profile-regular" icon="user-alt" onClick={toggle}>
+            <LinkItem link="/profil" icon="user-alt" onClick={toggle}>
               Lihat Profil
             </LinkItem>
-            <LinkItem link="/user-profile-setting" icon="setting-alt" onClick={toggle}>
+            <LinkItem link="/pengaturan" icon="setting-alt" onClick={toggle}>
               Pengaturan
             </LinkItem>
           </LinkList>

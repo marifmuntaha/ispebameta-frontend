@@ -16,6 +16,7 @@ import Evaluation from "../pages/evaluation";
 import Add from "../pages/evaluation/Add";
 import Result from "../pages/result"
 import Setting from "../pages/setting";
+import User from "../pages/user";
 
 const Router = () => {
     const location = useLocation();
@@ -35,18 +36,12 @@ const Router = () => {
                 <Route path="/penilaian/aspek/:aspectID/guru/:teacherID" element={<Add/>}/>
                 <Route path="/hasil-supervisi" element={<Result/>}/>
                 <Route path="/pengaturan" element={<Setting/>}/>
+                <Route path="/profil" element={<User/>}/>
             </Route>
             <Route path={`${process.env.PUBLIC_URL}`} element={<LayoutNoSidebar/>}>
                 {/*<Route path="reset-sandi" element={<ForgotPassword/>}></Route>*/}
                 <Route path="pendaftaran" element={<Register/>}></Route>
                 <Route path="masuk" element={<Login/>}></Route>
-
-                {/*<Route path="errors">*/}
-                {/*    <Route path="404" element={<Error404/>}></Route>*/}
-                {/*    <Route path="504" element={<Error504/>}></Route>*/}
-                {/*</Route>*/}
-                {/*<Route path="*" element={<Error404/>}></Route>*/}
-
             </Route>
         </Routes>
     );
