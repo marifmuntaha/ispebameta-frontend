@@ -35,7 +35,7 @@ const Teacher = () => {
         },
         {
             name: "Mata Pelajaran",
-            selector: (row) => row.subject,
+            selector: (row) => row.subject && row.subject.name,
             sortable: false,
             hide: "sm",
         },
@@ -152,7 +152,7 @@ const Teacher = () => {
             && loadingPrint.state === true
     }
     useEffect(() => {
-        Dispatch(actionType.TEACHER_GET, {setData: setTeachers}, {user: user.id}).then();
+        Dispatch(actionType.TEACHER_GET, {setData: setTeachers}, {user: user.id, with: 'subject'}).then();
         Dispatch(actionType.EVALUATION_GET, {setData: setEvaluations}, {user: user.id}).then();
     }, []);
     return <>

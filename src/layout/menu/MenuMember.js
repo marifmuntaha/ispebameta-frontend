@@ -5,6 +5,11 @@ const menuMember = [
         link: "/",
     },
     {
+        icon: "book",
+        text: "Mata Pelajaran",
+        link: "/mata-pelajaran",
+    },
+    {
         icon: "archive",
         text: "Instrumen",
         link: "/aspek",

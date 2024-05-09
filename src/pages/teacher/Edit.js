@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from "react";
 import {Button, Label, Modal, ModalBody, ModalHeader, Spinner} from "reactstrap";
-import {Icon} from "../../components";
+import {Icon, RSelect} from "../../components";
 import {actionType, Dispatch} from "../../reducer";
 
 const Edit = ({open, setOpen, setReload, teacher}) => {
     const [loading, setLoading] = useState(false);
+    const [subjectOption, setSubjectOption] = useState([]);
+    const [subjectSelected, setSubjectSelected] = useState([]);
     const [formData, setFormData] = useState({
         id: 0,
         name: '',
         nip: '',
-        subject: '',
+        subject: 0,
         phone: '',
     });
     const handleFormInput = (e) => {
@@ -26,8 +28,15 @@ const Edit = ({open, setOpen, setReload, teacher}) => {
             id: teacher.id || 0,
             name: teacher.name || '',
             nip: teacher.nip || '',
-            subject: teacher.subject || '',
+            subject: teacher.subject || 0,
             phone: teacher.phone || '',
+        });
+        Dispatch(actionType.SUBJECT_GET, {setData: setSubjectOption}, {type: 'select'}).then(resp => {
+            setSubjectSelected(() => {
+                return resp.filter((item) => {
+                    return teacher.subject ? item.value === teacher.subject.id : []
+                });
+            });
         })
     }, [teacher]);
     return <>
@@ -85,12 +94,14 @@ const Edit = ({open, setOpen, setReload, teacher}) => {
                             Mata Pelajaran
                         </Label>
                         <div className="form-control-wrap">
-                            <input
-                                className="form-control"
-                                type="text"
-                                name="subject"
-                                value={formData.subject}
-                                onChange={(e) => handleFormInput(e)}
+                            <RSelect
+                                options={subjectOption}
+                                value={subjectSelected}
+                                onChange={(e) => {
+                                    setFormData({...formData, subject: e.value})
+                                    setSubjectSelected(e);
+                                }}
+                                placeholder="Pilih Pelajaran"
                             />
                         </div>
                     </div>
@@ -116,7 +127,7 @@ const Edit = ({open, setOpen, setReload, teacher}) => {
                             color="primary"
                             disabled={loading}
                         >
-                            {loading ? <Spinner size="sm" color="light" /> : 'SIMPAN' }
+                            {loading ? <Spinner size="sm" color="light"/> : 'SIMPAN'}
                         </Button>
                     </div>
                 </form>

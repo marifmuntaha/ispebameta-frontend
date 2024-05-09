@@ -1,17 +1,19 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Button, Label, Modal, ModalBody, ModalHeader, Spinner} from "reactstrap";
-import {Icon} from "../../components";
+import {Icon, RSelect} from "../../components";
 import {actionType, Dispatch} from "../../reducer";
 import {UserContext} from "../user/UserContext";
 
 const Add = ({open, setOpen, setReload}) => {
     const user = useContext(UserContext);
+    const [subjectOption, setSubjectOption] = useState([]);
+    const [subjectSelected, setSubjectSelected] = useState([]);
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         user: user.id,
         name: '',
         nip: '',
-        subject: '',
+        subject: 0,
         phone: '',
     });
     const handleFormInput = (e) => {
@@ -26,10 +28,14 @@ const Add = ({open, setOpen, setReload}) => {
             user: user.id,
             name: '',
             nip: '',
-            subject: '',
+            subject: 0,
             phone: '',
         });
+        setSubjectSelected([]);
     }
+    useEffect(() => {
+        Dispatch(actionType.SUBJECT_GET, {setData: setSubjectOption}, {type: 'select'}).then();
+    }, []);
     return <>
         <Modal isOpen={open} toggle={toggle}>
             <ModalHeader
@@ -87,12 +93,14 @@ const Add = ({open, setOpen, setReload}) => {
                             Mata Pelajaran
                         </Label>
                         <div className="form-control-wrap">
-                            <input
-                                className="form-control"
-                                type="text"
-                                name="subject"
-                                placeholder="Ex. Geografi"
-                                onChange={(e) => handleFormInput(e)}
+                            <RSelect
+                                options={subjectOption}
+                                value={subjectSelected}
+                                onChange={(e) => {
+                                    setFormData({...formData, subject: e.value})
+                                    setSubjectSelected(e);
+                                }}
+                                placeholder="Pilih Pelajaran"
                             />
                         </div>
                     </div>
@@ -118,7 +126,7 @@ const Add = ({open, setOpen, setReload}) => {
                             color="primary"
                             disabled={loading}
                         >
-                            {loading ? <Spinner size="sm" color="light" /> : 'SIMPAN' }
+                            {loading ? <Spinner size="sm" color="light"/> : 'SIMPAN'}
                         </Button>
                     </div>
                 </form>

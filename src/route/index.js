@@ -17,6 +17,7 @@ import Add from "../pages/evaluation/Add";
 import Result from "../pages/result"
 import Setting from "../pages/setting";
 import User from "../pages/user";
+import Subject from "../pages/subject";
 
 const Router = () => {
     const location = useLocation();
@@ -30,6 +31,7 @@ const Router = () => {
                 <Route index element={<Dashboard/>}/>
                 <Route path="/data-guru" element={<Teacher/>}/>
                 <Route path="/aspek" element={<Aspect/>}/>
+                <Route path="/mata-pelajaran" element={<Subject/>}/>
                 <Route path="/aspek/:aspectID" element={<Instrument/>}/>
                 <Route path="/aspek/:aspectID/instrumen/:instrumentID" element={<Indicator/>}/>
                 <Route path="/penilaian" element={<Evaluation/>}/>

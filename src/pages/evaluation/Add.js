@@ -28,7 +28,7 @@ const Add = () => {
     useEffect(() => {
         Dispatch(actionType.EVALUATION_GET, {setData: setEvaluation}, {teacher: teacherID, aspect: aspectID}).then();
         Dispatch(actionType.ASPECT_SHOW, {setData: setAspect}, {id: aspectID}).then();
-        Dispatch(actionType.TEACHER_SHOW, {setData: setTeacher}, {id: teacherID}).then();
+        Dispatch(actionType.TEACHER_SHOW, {setData: setTeacher}, {id: teacherID, with: 'subject'}).then();
         Dispatch(actionType.INSTRUMENT_GET,
             {setData: setInstruments},
             {aspect: aspectID, with: 'indicator'}).then();
@@ -57,7 +57,7 @@ const Add = () => {
                 <BlockBetween>
                     <BlockHeadContent>
                         <BlockTitle tag="h4">PENILAIAN : {aspect.name}</BlockTitle>
-                        <p>Nama Guru: {teacher.name} | NIP: {teacher.nip} | Mata Pelajaran: {teacher.subject}</p>
+                        <p>Nama Guru: {teacher.name} | NIP: {teacher.nip} | Mata Pelajaran: {teacher.subject && teacher.subject.name}</p>
                     </BlockHeadContent>
                 </BlockBetween>
             </BlockHead>

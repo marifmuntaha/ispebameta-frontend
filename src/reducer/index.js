@@ -45,6 +45,26 @@ async function Dispatch(method, state, params) {
             return await deleteData(url, state).then(resp => {
                 return resp;
             });
+        case actionType.SUBJECT_GET :
+            url = '/subject';
+            return await getData(url, state, params).then(resp => {
+                return resp;
+            });
+        case actionType.SUBJECT_STORE :
+            url = '/subject';
+            return await storeData(url, state).then(resp => {
+                return resp;
+            });
+        case actionType.SUBJECT_UPDATE :
+            url = `/subject/${state.formData.id}`;
+            return await updateData(url, state).then(resp => {
+                return resp;
+            });
+        case actionType.SUBJECT_DELETE :
+            url = `/subject/${state.id}`;
+            return await deleteData(url, state).then(resp => {
+                return resp;
+            });
         case actionType.INSTRUMENT_GET :
             url = '/instrument';
             return await getData(url, state, params).then(resp => {

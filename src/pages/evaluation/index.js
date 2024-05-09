@@ -28,7 +28,7 @@ const Evaluation = () => {
         },
         {
             name: "Mata Pelajaran",
-            selector: (row) => row.subject,
+            selector: (row) => row.subject ? row.subject.name : '',
             sortable: false,
             hide: "sm",
         },
@@ -57,7 +57,7 @@ const Evaluation = () => {
         },
     ]
     useEffect(() => {
-        Dispatch(actionType.TEACHER_GET, {setData: setTeachers}, {user: user}).then();
+        Dispatch(actionType.TEACHER_GET, {setData: setTeachers}, {user: user, with: 'subject'}).then();
         Dispatch(actionType.ASPECT_GET, {setData: setAspects}).then();
     }, []);
     return <>
