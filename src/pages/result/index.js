@@ -138,7 +138,7 @@ const Teacher = () => {
             formData: evaluation
         }).then(resp => {
             console.log(resp.result);
-            window.open(resp['result']), '_blank')
+            window.open(resp['result'], '_blank')
             setLoadingPrint({
                 id: 0,
                 aspect: 0,
