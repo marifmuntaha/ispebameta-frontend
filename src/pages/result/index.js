@@ -137,7 +137,7 @@ const Teacher = () => {
         Dispatch(actionType.EVALUATION_PRINT, {
             formData: evaluation
         }).then(resp => {
-            window.open(resp, '_blank');
+            window.location.href = resp;
             setLoadingPrint({
                 id: 0,
                 aspect: 0,
