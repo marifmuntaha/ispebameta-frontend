@@ -137,8 +137,8 @@ const Teacher = () => {
         Dispatch(actionType.EVALUATION_PRINT, {
             formData: evaluation
         }).then(resp => {
-            console.log(encodeURI(resp.result));
-            window.open(encodeURI(resp.result), '_blank')
+            console.log(resp.result);
+            window.open(resp['result']), '_blank')
             setLoadingPrint({
                 id: 0,
                 aspect: 0,
